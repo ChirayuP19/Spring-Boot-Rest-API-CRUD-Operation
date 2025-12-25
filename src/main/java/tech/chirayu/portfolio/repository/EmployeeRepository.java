@@ -1,5 +1,12 @@
 package tech.chirayu.portfolio.repository;
 
-public interface EmployeeRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import tech.chirayu.portfolio.entity.Employee;
+
+@Repository
+// here we must have to give me entityt name. 
+public interface EmployeeRepository extends JpaRepository<Employee, Long>{
 
 }
