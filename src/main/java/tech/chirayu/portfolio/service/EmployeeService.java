@@ -1,5 +1,7 @@
 package tech.chirayu.portfolio.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import tech.chirayu.portfolio.Dto.EmployeeDto;
@@ -10,7 +12,6 @@ public interface EmployeeService {
 
 	public Employee saveEmployee(EmployeeDto employeeDto);
 
-	
-
+	public List<Employee> readAllData();
 	
 }

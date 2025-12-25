@@ -29,5 +29,11 @@ public class EmployeeController {
 	// return ResponseEntity.status(HttpStatus.CREATED).body(employee);
 	return new ResponseEntity<Employee>(employee,HttpStatus.CREATED);
 	}
+	
+	@GetMapping("/employee")
+	public ResponseEntity<?> realAllData() {
+	List<Employee> list=employeeService.readAllData();
+	return ResponseEntity.status(HttpStatus.OK).body(list);
+	}
 
 }
