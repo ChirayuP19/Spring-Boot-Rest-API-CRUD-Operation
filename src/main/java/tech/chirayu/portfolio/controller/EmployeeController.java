@@ -2,11 +2,13 @@ package tech.chirayu.portfolio.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +36,16 @@ public class EmployeeController {
 	public ResponseEntity<?> realAllData() {
 	List<Employee> list=employeeService.readAllData();
 	return ResponseEntity.status(HttpStatus.OK).body(list);
+	}
+	
+	@GetMapping("/employee/{id}")
+	public ResponseEntity<?> readSingleData(@PathVariable long id) {
+	Optional<Employee> op=employeeService.readSingleData(id);
+	if(op.isPresent()) {
+		return ResponseEntity.status(HttpStatus.OK).body(op.get());
+	}
+	return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	
 	}
 
 }

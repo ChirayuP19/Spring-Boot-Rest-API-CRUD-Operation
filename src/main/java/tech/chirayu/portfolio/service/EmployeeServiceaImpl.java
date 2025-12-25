@@ -2,6 +2,7 @@ package tech.chirayu.portfolio.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,11 @@ public class EmployeeServiceaImpl implements EmployeeService {
 	@Override
 	public List<Employee> readAllData() {
 		return employeeRepository.findAll();
+	}
+
+	@Override
+	public Optional<Employee> readSingleData(long id) {
+		return employeeRepository.findById(id);
 	}
 
 }
