@@ -16,5 +16,9 @@ public interface EmployeeService {
 	public List<Employee> readAllData();
 
 	public Optional<Employee> readSingleData(long id);
+
+	public Optional<Employee> readDataByName(String name);
+
+	
 	
 }

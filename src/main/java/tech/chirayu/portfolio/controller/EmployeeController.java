@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tech.chirayu.portfolio.Dto.EmployeeDto;
@@ -21,31 +22,40 @@ import tech.chirayu.portfolio.service.EmployeeService;
 @RestController
 @RequestMapping("/api")
 public class EmployeeController {
-	
+
 	@Autowired
-	private  EmployeeService employeeService;
+	private EmployeeService employeeService;
 
 	@PostMapping("/employee")
 	public ResponseEntity<?> saveData(@RequestBody EmployeeDto employeeDto) {
-	Employee employee=employeeService.saveEmployee(employeeDto);
-	// return ResponseEntity.status(HttpStatus.CREATED).body(employee);
-	return new ResponseEntity<Employee>(employee,HttpStatus.CREATED);
+		Employee employee = employeeService.saveEmployee(employeeDto);
+		// return ResponseEntity.status(HttpStatus.CREATED).body(employee);
+		return new ResponseEntity<Employee>(employee, HttpStatus.CREATED);
 	}
-	
+
 	@GetMapping("/employee")
 	public ResponseEntity<?> realAllData() {
-	List<Employee> list=employeeService.readAllData();
-	return ResponseEntity.status(HttpStatus.OK).body(list);
+		List<Employee> list = employeeService.readAllData();
+		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
-	
+
 	@GetMapping("/employee/{id}")
 	public ResponseEntity<?> readSingleData(@PathVariable long id) {
-	Optional<Employee> op=employeeService.readSingleData(id);
-	if(op.isPresent()) {
-		return ResponseEntity.status(HttpStatus.OK).body(op.get());
+		Optional<Employee> singleData = employeeService.readSingleData(id);
+		if (singleData.isPresent()) {
+			return ResponseEntity.status(HttpStatus.OK).body(singleData.get());
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	}
-	return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-	
+
+	@GetMapping("/employee/name/{name}")
+	public ResponseEntity<?> readDataByName(@PathVariable String name) {
+		Optional<Employee> optional = employeeService.readDataByName(name);
+
+		if (optional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.OK).body(optional.get());
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	}
 
 }

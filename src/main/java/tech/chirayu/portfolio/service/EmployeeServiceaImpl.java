@@ -45,4 +45,8 @@ public class EmployeeServiceaImpl implements EmployeeService {
 		return employeeRepository.findById(id);
 	}
 
+	public Optional<Employee> readDataByName(String name) {
+		return employeeRepository.findByName(name);
+	}
+
 }
