@@ -14,8 +14,14 @@ import tech.chirayu.portfolio.repository.EmployeeRepository;
 @Service
 public class EmployeeServiceaImpl implements EmployeeService {
 
+//    private  EmployeeService employeeService;
+
 	@Autowired
 	private EmployeeRepository employeeRepository;
+
+//    EmployeeServiceaImpl(EmployeeService employeeService) {
+//        this.employeeService = employeeService;
+//    }
 	
 	private Employee employeedtotoEntity(EmployeeDto employeeDto) {
 		Employee employee = new Employee();
@@ -70,6 +76,30 @@ public class EmployeeServiceaImpl implements EmployeeService {
 			Employee save = employeeRepository.save(employee);
 			return save	;
 		}
+		return null;
+	}
+
+	@Override
+	public Employee updateAddress(Long id, String address) {
+		Optional<Employee> op = employeeRepository.findById(id);
+		if(op.isPresent()) {
+			Employee employee = op.get();
+			employee.setAddress(address);
+			Employee save = employeeRepository.save(employee);
+			return save;
+		}
+		return null;
+	}
+
+	@Override
+	public Employee updatename(Long id, String name) {
+	Optional<Employee> namechek = employeeRepository.findById(id);
+	if(namechek.isPresent()) {
+		Employee employee = namechek.get();
+		employee.setName(name);
+		Employee save = employeeRepository.save(employee);
+		return save;
+	}
 		return null;
 	}
 

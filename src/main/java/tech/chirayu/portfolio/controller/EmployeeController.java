@@ -18,14 +18,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tech.chirayu.portfolio.Dto.EmployeeDto;
 import tech.chirayu.portfolio.entity.Employee;
+import tech.chirayu.portfolio.repository.EmployeeRepository;
 import tech.chirayu.portfolio.service.EmployeeService;
 
 @RestController
 @RequestMapping("/api")
 public class EmployeeController {
 
+    private final EmployeeRepository employeeRepository;
+
 	@Autowired
 	private EmployeeService employeeService;
+
+    EmployeeController(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
 	@PostMapping("/employee")
 	public ResponseEntity<?> saveData(@RequestBody EmployeeDto employeeDto) {
@@ -77,5 +84,23 @@ public class EmployeeController {
 		}
 		
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	}
+	
+	@PutMapping("/employee/{id}/address")
+	public ResponseEntity<?> updateAddress(@PathVariable Long id, @RequestParam String address) {
+		Employee employee = employeeService.updateAddress(id,address);
+		if(employee!=null) {
+			return ResponseEntity.status(HttpStatus.OK).body(employee);
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	}
+	
+	@PutMapping("/employee/{id}/name")
+	public ResponseEntity<Employee> updatename(@PathVariable Long id,@RequestParam String name){
+		Employee updatename = employeeService.updatename(id, name);
+		if(updatename!=null) {
+			return ResponseEntity.status(HttpStatus.OK).body(updatename);
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();	
 	}
 }

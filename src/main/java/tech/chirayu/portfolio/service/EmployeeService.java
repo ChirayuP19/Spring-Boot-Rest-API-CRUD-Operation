@@ -25,6 +25,12 @@ public interface EmployeeService {
 
 	Employee updatePartialData(Long id, Double salary);
 
+	public Employee updateAddress(Long id, String address);
+	
+	
+
+	public Employee updatename(Long id, String name);
+
 	
 	
 }
