@@ -19,6 +19,8 @@ public interface EmployeeService {
 
 	public Optional<Employee> readDataByName(String name);
 
+	public Employee updateAllData(Long id, EmployeeDto employeeDto);
+
 	
 	
 }

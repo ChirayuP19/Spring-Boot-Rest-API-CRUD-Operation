@@ -49,4 +49,16 @@ public class EmployeeServiceaImpl implements EmployeeService {
 		return employeeRepository.findByName(name);
 	}
 
+	@Override
+	public Employee updateAllData(Long id, EmployeeDto employeeDto) {
+		Optional<Employee> byId = employeeRepository.findById(id);
+		if(byId.isPresent()) {
+			Employee employee = employeedtotoEntity(employeeDto);
+			Employee save = employeeRepository.save(employee);
+			return save;	
+		}
+		
+		return null;
+	}
+
 }
