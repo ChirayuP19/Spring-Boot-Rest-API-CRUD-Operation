@@ -31,6 +31,8 @@ public interface EmployeeService {
 
 	public Employee updatename(Long id, String name);
 
+	public void deleteByID(Long id);
+
 	
 	
 }
