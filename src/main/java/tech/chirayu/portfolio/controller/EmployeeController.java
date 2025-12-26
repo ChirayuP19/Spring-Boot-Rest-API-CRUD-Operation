@@ -68,5 +68,14 @@ public class EmployeeController {
 		
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	}
-
+	
+	@PutMapping("/employee/{id}/salary")
+	public ResponseEntity<?> updateAllData(@PathVariable Long id,@RequestParam Double salary) {
+		Employee employee = employeeService.updatePartialData(id,salary);
+		if(employee!=null) {
+			return ResponseEntity.status(HttpStatus.OK).body(employee);
+		}
+		
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	}
 }

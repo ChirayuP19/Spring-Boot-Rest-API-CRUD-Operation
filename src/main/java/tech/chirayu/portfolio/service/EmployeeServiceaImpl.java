@@ -61,4 +61,16 @@ public class EmployeeServiceaImpl implements EmployeeService {
 		return null;
 	}
 
+	@Override
+	public Employee updatePartialData(Long id, Double salary) {
+		Optional<Employee> byId = employeeRepository.findById(id);
+		if(byId.isPresent()) {
+			Employee employee = byId.get();
+			employee.setSalary(salary);
+			Employee save = employeeRepository.save(employee);
+			return save	;
+		}
+		return null;
+	}
+
 }

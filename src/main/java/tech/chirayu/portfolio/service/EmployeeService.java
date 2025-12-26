@@ -22,5 +22,9 @@ public interface EmployeeService {
 	public Employee updateAllData(Long id, EmployeeDto employeeDto);
 
 	
+
+	Employee updatePartialData(Long id, Double salary);
+
+	
 	
 }
